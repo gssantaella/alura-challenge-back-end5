@@ -16,13 +16,15 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
-from aluraflixbe.views import VideosViewSet
+from aluraflixbe.views import VideosViewSet, CategoriasViewset, ListaVideosPorCategoria
 
 
 router = routers.DefaultRouter()
 router.register('videos', VideosViewSet, basename='Videos')
+router.register('categorias', CategoriasViewset, basename='Categorias')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include(router.urls))
+    path('', include(router.urls)),
+    path('categorias/<int:pk>/videos/', ListaVideosPorCategoria.as_view())
 ]
